@@ -1,0 +1,27 @@
+Create a virtual enviroment:
+python -m venv dj
+source dj/bin/activate
+
+download django
+pip install django
+
+create project:
+django-admin startproject mysite
+then cd to project
+then runserver:
+python3 manage.py runserver
+
+create App:
+python3 manage.py startapp cybrprjap
+python -m pip freeze -> shows show only used packages
+run server -> python3 manage.py runserver
+
+# An app is what will have pages and views and represent your site. Whereas the project is kind of an environment that runs your app!
+
+* Urls.py in main is what connects to the different view page of main/views.py
+* if user doesn't put anything in the url it automatically redirects to the home page of views.index
+* In the project url part an empty path is your default page - like a landing page
+* In the project setting file, adding main.apps. MainConfig under the installed apps,
+tells django to look for apps in main folder and configured and updated when modifications are made.
+*path("<int:id>", views.index, name="index") id of list
+path("<str:name>", views.index, name="index") name of list
