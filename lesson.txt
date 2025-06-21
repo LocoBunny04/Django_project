@@ -45,8 +45,8 @@ def index(response, id):
     return HttpResponse(f"<h1>{ls.name}</h1>") enter the id of list
 
      ls = ToDoList.objects.get(name=name)
-    item = ls.item_set.get()
-    return HttpResponse("<h1>%s</h1><br></br><p>%s</p>" % (ls.name, str(item.text) list name
+    task = ls.task_set.get()
+    return HttpResponse("<h1>%s</h1><br></br><p>%s</p>" % (ls.name, str(task.text) list name
 
 
 Adding Object:
@@ -63,6 +63,85 @@ ToDoList: Tim's List ›
 >>> ToDoList.objects.get(name="Tim's List")
 <ToDoList: Tim's List>
 
-Creating Item:
-ct.task_set.all() # give set of item
+Creating task:
+ct.task_set.all() # give set of task
 ct.task_set.create(text=" ", complete=False)
+
+Get from existing list:
+t = ToDoList.objects.get(name="Cyber Projects")
+
+ct.task_set.create(text="Create Django Secure Web App", complete=False)
+ct.task_set.create(text="Secure Access with Azure Active Directory (AD): https://lnkd.in/eX__TrFn", complete=False)
+ct.task_set.create(text="Build a Phishing Attack Simulator: https://lnkd.in/ezgpQaKb", complete=False)
+ct.task_set.create(text="Create Work Your Own IT Ticketing System: https://lnkd.in/gtFSfMw3", complete=False)
+ct.task_set.create(text="Build your own Host-based Intrusion Detection System (IDS): https://lnkd.in/evdzdTyJ", complete=False)
+ct.task_set.create(text="Your First Ethical Hack/Pentest: https://lnkd.in/etqyu5sX", complete=False)
+ct.task_set.create(text="Cybersecurity Job Simulations: https://lnkd.in/eT4tT_kx", complete=False)
+ct.task_set.create(text="Vulnerability Scanner", complete=False)
+ct.task_set.create(text=" IR playbook", complete=False)
+ct.task_set.create(text="Threat Intell Dash (may also collab with AI and Webscraping)", complete=False)
+ct.task_set.create(text=" CTF tools", complete=False)
+ct.task_set.create(text="Sandbox (This is goign to use some Docker and Virtual Box stuff.", complete=False)
+ct.task_set.create(text="Password Manager - I always say use KeePass2, but making our own would be useful in places where we can't use KeePass. ", complete=False)
+ct.task_set.create(text="Honey pot - HMG also has some research papers on this", complete=False)
+ct.task_set.create(text="Cloud Auditor - CI/CD pipline", complete=False)
+ct.task_set.create(text="network traffic Analysis tool - Usually just use Wireshark, but making our own same reason for key pass.", complete=False)
+ct.task_set.create(text="Secure File Sharing System - so we have the abilityt o make one.", complete=False)
+ct.task_set.create(text="Log Parser - this is also partly for CTF tools so we can sift through logs faster.", complete=False)
+ct.task_set.create(text="Autopsy clone", complete=False)
+ct.task_set.create(text="Social Engineering Sim - I'm thinking have like a sound board and some OSINT stuff ready for when you may have to do Social Engineering Challenges.", complete=False)
+ct.task_set.create(text="Encrypt/Decrypt Utility.", complete=False)
+
+SHOW ALL LIST ITEM:
+task = ls.task_set.all()
+task_text = "<br>".join(task.text for task in task)
+
+SETTING VARIABLE TO SPECIFIC LIST:
+t = ToDoList.objects.get(id=#)
+
+FINDING SPECIFIC IDS:
+To find specific id of list item:
+1. set variable for task list => tasks = (list variable).task_set.all()
+2. print the list => for task in tasks: print(f"ID: {task.id}, Text: {task.text}")
+
+To find specific IDs of Lists:
+list_id =  ToDoList.objects.all()
+for todo in list_id: print(f"ID: {todo.id}, Name: {todo.name}")
+
+or get ID of current list variable: t.id
+
+DELETE ITEM:
+1. Get id of task to delete => task_to_delete = t(list variable).task_set.get(id=task_id)
+2. delete => task_to_delete.delete()
+
+Reset ID counter of List:
+1. get into shell and import:
+   • from cybr.models import ToDoList
+   • from django.db import connection
+2. Delete Lists excluding the ones you want to keep (important)
+  ToDoList.objects.exclude(name__in=["Non-Academic List", "Cyber Projects"]).delete()
+3. Delete the current cursor placement of the list id counter + 4. Set cursor to start after number:
+with connection.cursor() as cursor:    cursor.execute('DELETE FROM sqlite_sequence WHERE name="cybr_todolist";')    cursor.execute('INSERT INTO sqlite_sequence (name, seq) VALUES ("cybr_todolist", #);') 
+ '#' is the current number you want the counter to restart at 
+ so if you want the next ID to be 4 put 3 etc.
+5. Create a new list:
+t = ToDoList(name=" ")
+t.save()
+6. Verify:
+print(f"New ToDoList ID: {new_todo_list.id}")
+
+FIND CURRENT CURSOR ID:
+with connection.cursor() as cursor:
+    cursor.execute('SELECT seq FROM sqlite_sequence WHERE name="cybr_todolist";')
+    current_id = cursor.fetchone()
+    if current_id:
+        print(f"Current cursor ID: {current_id[0]}")
+    else:
+        print("The sequence for 'cybr_todolist' does not exist.")
+
+Creating a admin user:
+python manage.py createsuperuser
+W3b@pp25*
+
+Admin
+to have admin access to database: admin.site.register(database name (ToDoList or Task))

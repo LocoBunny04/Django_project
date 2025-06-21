@@ -5,6 +5,6 @@ from . import views
 # Create your URL paths here.
 
 urlpatterns = [
-    path('<str:id>', views.index, name='index'),
+    path('<int:id>', views.index, name='index'),
     # path('<str:name>', views.index_nm, name='index_nm'),
     ]

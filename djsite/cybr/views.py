@@ -8,11 +8,11 @@ def home(response):
 
 def index(response, id):
     ls = ToDoList.objects.get(id=id)
-    return HttpResponse("<h1>%s</h1>" % ls.name)
+    return HttpResponse("<h1>%s</h1>" %ls.id)
 
 # def index_nm(response, name):
 #     ls = ToDoList.objects.get(name=name)
-#     item = ls.item_set.all()
-#     items_text = "<br>".join(item.text for item in item)
+#     task = ls.task_set.all()
+#     task_text = "<br>".join(task.text for task in task)
 
-#     return HttpResponse("<h1>%s</h1><br></br><p>%s</p>" % (ls.name, items_text))
+#     return HttpResponse("<h1>%s</h1><br></br><p>%s</p>" % (ls.name, task_text))
