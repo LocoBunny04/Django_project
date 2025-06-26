@@ -1,0 +1,15 @@
+{% extends "cybr/base.html" %}
+{% block title %}View List{% endblock %}
+
+{% block content %}
+	<h1>{{ls.name}}</h1>
+	<ul>
+		{% for task in ls.task_set.all %}
+			{% if task.complete == True %}
+				<li>{{task.text}} - COMPLETE</li>
+			{% else %}
+				<li>{{task.text}} - INCOMPLETE</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+{% endblock %}

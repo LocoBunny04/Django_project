@@ -8,7 +8,10 @@ def home(response):
 
 def index(response, id):
     ls = ToDoList.objects.get(id=id)
-    return HttpResponse("<h1>%s</h1>" %ls.id)
+    return render(response, "cybr/list.html", {"name":ls.name})
+
+def home(response):
+	return render(response, "main/home.html", {"name": "test"})
 
 # def index_nm(response, name):
 #     ls = ToDoList.objects.get(name=name)
