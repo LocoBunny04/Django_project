@@ -145,3 +145,22 @@ W3b@pp25*
 
 Admin
 to have admin access to database: admin.site.register(database name (ToDoList or Task))
+
+Templates:
+to load templates you need a folder of the same name as application in template folder
+
+you can pass variables through the dictionary in views using {"variable_name": ls.name} and html {{variable name}}
+content block can overwrite template block
+
+each of the pages that inherits the base
+the unique customization will go in the content block {% content block %} {% end block %}
+
+Create a new to-do list without command prompt
+
+on the create.html
+Django will create an html form as long as we pass the variable called form {{form}}
+We just have to create the tags for button and methods and actions
+
+{{form.as_table}} is the default layout
+{{form.as_p}} will show items vertically
+{{form.as_ul}} will show as dot like a list

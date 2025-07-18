@@ -1,0 +1,12 @@
+{% extends 'cybr/base.html' %}
+
+{% block title %} Create New List {% endblock %}
+
+{% block content %}
+    Create a new To-Do List
+    <form method="POST" action="/create/">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit", name="save">Create New</button>
+    </form>
+{% endblock %}
